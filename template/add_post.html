@@ -1,0 +1,22 @@
+{% extends 'base.html '%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>{% block title %}Create new blog post {% endblock %} </title>
+</head>
+<body>
+    {% block content %}
+    <h1>Add Post</h1>
+ 
+    <form method ="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.media }}
+        {{ form.as_p }}
+        <button class="btn btn-dark">SUBMIT</button>
+    </form>
+
+ 
+    {% endblock %}
+</body>
+</html>

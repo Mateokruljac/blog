@@ -1,0 +1,22 @@
+{% extends 'base.html '%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>{% block title %}Edit profile info{% endblock %} </title>
+</head>
+<body>
+    {% block content %}
+    <h1>Edit Profile Info</h1>
+ 
+    <form method ="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+   
+        {{ form.as_p }}
+        <button class="btn btn-dark">UPDATE</button>
+    </form>
+
+ 
+    {% endblock %}
+</body>
+</html>

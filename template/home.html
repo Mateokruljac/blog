@@ -1,0 +1,35 @@
+{% extends 'base.html '%}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        
+        <title>{% block title %}My blog post {% endblock %} </title>
+    </head>
+    <body>
+{% block content %}
+    <h1>Post</h1>
+    {% for post in post_list %}
+        {% if user.is_authenticated %}
+            {% if user.id == post.author.id %}
+                <li><a href="{% url 'artical_detail' post.pk %}">{{ post.title }}</a> - 
+                {{ post.author.username }} - Category : <a href="{% url 'category' post.category %}">{{ post.category }}</a>
+                
+                <button class = "btn btn-secondary"><a href = "{% url 'edit_post' post.id %}"style ="color:blanchedalmond">Edit</a></button>
+                <button class = "btn btn-secondary"><a href = "{% url 'delete_post' post.id %}"style ="color:blanchedalmond">Delete</a></button></li>
+                <p>{{ post.snippet }}</p>
+                {% else %}
+                <li><a href="{% url 'artical_detail' post.pk %}">{{ post.title }}</a> - 
+                {{ post.author.username }} - Category : <a href="{% url 'category' post.category %}">{{ post.category }}</a>
+                <p>{{ post.snippet }}</p>
+            {% endif %}   
+        {% else %}
+            <li><a href="{% url 'artical_detail' post.pk %}">{{ post.title }}</a>
+            {{ post.author.username }}  - Category : <a href="{% url 'category' post.category%}">{{ post.category }}</a></li>
+            <p>{{ post.snippet }}</p>        
+            {% endif %}
+    {% endfor %}    
+
+{% endblock %}
+</body>
+</html>

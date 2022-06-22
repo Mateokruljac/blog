@@ -1,0 +1,54 @@
+{% extends 'base.html '%}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        
+        <title>{% block title %}My blog post {% endblock %} </title>
+    </head>
+    <body>
+        <br><br>
+{% block content %}
+  <h3>{{ user_profile.user.username}}`s Profile Page</h3>
+<div class="card mb-3" style="max-width: 540px;">
+    <div class="row no-gutters">
+      <div class="col-md-4">
+        {% if user_profile.profile_images %} 
+        <img src="{{ user_profile.profile_images.url }}" 
+          class="card-img">
+        {% else %}
+        <img src="{% static 'images/user.png' %}" 
+         class="card-img">
+        {% endif %}
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">Name: {{ user_profile.user.first_name }}</h5>
+          <h5 class="card-title">Surname: {{ user_profile.user.last_name }}</h5>
+          <div class="small text-muted">
+            {% if user_profile.instagram_url %}
+             <a href = "{{ user_profile.instagram_url }}"> Instagram|</a>
+             {% endif %}
+             {% if user_profile.facebook_url %}
+            <a href = "{{ user_profile.facebook_url }}">  Facebook| </a>
+            {% endif %}
+            {% if user_profile.twitter_url %}
+            <a href = "{{ user_profile.twitter_url }}"> Twitter|</a>
+            {% endif %}
+            {% if user_profile.linkedin_url %}
+            <a href = "{{ user_profile.linkedin_url }}"> LinkedIn </a>
+            {% endif %}
+            </div>
+
+
+          <p class="card-text">Bio: {{ user_profile.biography }}</p>
+        </div>
+      </div>
+    </div>
+  </div> 
+
+<button class="btn btn-secondary"><a href="{% url 'home' %}" style="color:blanchedalmond">Back</a></button>
+{% endblock %}
+</body>
+</html>

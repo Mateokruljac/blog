@@ -1,0 +1,27 @@
+{% extends 'base.html '%}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ 
+    <title>{% block title %}My blog category {% endblock %} </title>
+</head>
+<body>
+
+    {% block content %}
+
+    <ul>
+    <h1>Category</h1>
+    <hr>
+      {% for category in categories %}
+      
+          <p>{{ category.name }}</p>        
+       
+       {% endfor %}
+    
+       <h5>Please find the categories you are interested in in the search box.</h5>            
+   <button class  = "btn btn-secondary " ><a href ="{% url 'home' %}" style ="color:blanchedalmond">Back</a></button> 
+    </ul>
+    {% endblock %}
+</body>
+</html>
