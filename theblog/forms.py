@@ -14,7 +14,7 @@ class PostForm(forms.ModelForm): # greška je ako stavimo form bez model
         fields = ["title","title_tag","body","category","author","snippet","image"]   
         widgets = {
             "body": forms.Textarea(attrs={"class":"form-control","placeholder":"Write..."}),
-            "author" : forms.TextInput(attrs= {"class":"form-control","id":"requestUser","disabled" :"True"})
+            "author" : forms.Select(attrs= {"class":"form-control"})
             
 
         }

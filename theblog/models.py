@@ -38,7 +38,7 @@ class Post(models.Model):
     body = RichTextField(blank = True, null = True)
     snippet = models.CharField(max_length=250,default="Click link above to read a post!")
     post_date = models.DateField(auto_now_add=True)
-    image = models.ImageField(null = True, blank = True,upload_to = "images")
+    image = models.ImageField(null = True,blank = False,upload_to = "images")
     category = models.CharField(max_length=250,default="Uncategorized")
     like  = models.ManyToManyField(User,related_name= "blog_post") 
     
@@ -46,7 +46,7 @@ class Post(models.Model):
         return f"Title: {self.title}, Author: {self.author}" 
     
     def get_absolute_url (self):
-        return reverse("artical_detail",args = str(self.pk) )
+        return reverse("home")
     
     def total_likes (self):
         return self.like.count()
