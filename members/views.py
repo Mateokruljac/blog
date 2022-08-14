@@ -5,7 +5,7 @@ from django.urls import reverse, reverse_lazy
 from django.views import generic
 from django.contrib.auth.forms import UserCreationForm,UserChangeForm
 from members.forms import EditForm, ProfilePageForm, SignUpForm
-from theblog.models import Profile
+from theblog.models import Profile,Category
 
 
 
@@ -13,6 +13,12 @@ class CreateUserForm(generic.CreateView):
     form_class = SignUpForm
     template_name = "registration/register.html" 
     success_url = reverse_lazy("login")
+    
+    def get_context_data(self, *args, **kwargs):
+        category_menu = Category.objects.all()
+        context = super(CreateUserForm,self).get_context_data(*args, **kwargs)
+        context["category_menu"] = category_menu
+        return context 
 
 class CreateProfilePage(generic.CreateView):
     form_class = ProfilePageForm
@@ -23,6 +29,12 @@ class CreateProfilePage(generic.CreateView):
     def form_valid(self,form):
         form.instance.user = self.request.user
         return super().form_valid(form) # čuvamo formu 
+    
+    def get_context_data(self, *args, **kwargs):
+        category_menu = Category.objects.all()
+        context = super(CreateProfilePage,self).get_context_data(*args, **kwargs)
+        context["category_menu"] = category_menu
+        return context 
 
 
 class EditUserForm(generic.UpdateView):
@@ -33,6 +45,12 @@ class EditUserForm(generic.UpdateView):
     def get_object(self):
         return self.request.user
     
+    def get_context_data(self, *args, **kwargs):
+        category_menu = Category.objects.all()
+        context = super(EditUserForm,self).get_context_data(*args, **kwargs)
+        context["category_menu"] = category_menu
+        return context 
+    
 
 class UserDetailView (generic.DetailView):
     model = Profile
@@ -42,7 +60,10 @@ class UserDetailView (generic.DetailView):
         # users = Profile.objects.all()
         context = super(UserDetailView,self).get_context_data(*args, **kwargs)
         user_profile = get_object_or_404(Profile,id = self.kwargs["pk"])
-        context["user_profile"] = user_profile
+        context["user_profile"] = user_profile 
+        category_menu = Category.objects.all()
+        context["category_menu"] = category_menu
+        
         return context
                 
 
@@ -52,10 +73,9 @@ class UserEditView(generic.UpdateView):
     fields = ["biography","profile_images","facebook_url","instagram_url","linkedin_url","twitter_url"]
     success_url = reverse_lazy("home")
     
-    
-    
-def aboutUs(request):
-    return HttpResponse("<h1>Comming Soon</h1>")
-    
-def contact(request):
-    return HttpResponse("<h1>Comming Soon</h1>")
+    def get_context_data(self, *args, **kwargs):
+        category_menu = Category.objects.all()
+        context = super(UserEditView,self).get_context_data(*args, **kwargs)
+        context["category_menu"] = category_menu
+        return context 
+

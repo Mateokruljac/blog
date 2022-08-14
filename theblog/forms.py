@@ -1,7 +1,7 @@
 from django import forms
 from .models import Comment, Post,Category
 
-choices = Category.objects.all().values_list("name","name") #uvijek moramo dvaput navest prvi put je naredba drugi izvršavanje
+choices = Category.objects.all().values_list("name","name")#uvijek moramo dvaput navest prvi put je naredba drugi izvršavanje
 choices_list = []
 
 
@@ -14,6 +14,7 @@ class PostForm(forms.ModelForm): # greška je ako stavimo form bez model
         fields = ["title","title_tag","body","category","author","snippet","image"]   
         widgets = {
             "body": forms.Textarea(attrs={"class":"form-control","placeholder":"Write..."}),
+            "author" : forms.TextInput(attrs= {"class":"form-control","id":"requestUser","disabled" :"True"})
             
 
         }

@@ -119,9 +119,10 @@ USE_TZ = True
 STATICFILES_DIR = [
     os.path.join(BASE_DIR,'static')
 ]
-
+#postaviti statične i media url
 STATIC_URL = '/static/'
 MEDIA_URL  = '/media/' 
+#media root
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
 STATICFILES_DIR = (
@@ -137,6 +138,7 @@ STATIC_ROOT = os.path.join(
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+#nakon logina preusmjerava se na home..ista stvar i za logout
 LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "home"
 
