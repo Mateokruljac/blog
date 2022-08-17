@@ -1,0 +1,14 @@
+{% extends 'base.html '%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>{% block title %} Login {% endblock %} </title>
+</head>
+<body>
+    {% block content %}
+ <h1> {{ user.username}}, your password is successfully changed!</h1>
+ <p>Please click on the home button!</p>
+    {% endblock %}
+</body>
+</html>

@@ -31,6 +31,7 @@ class HomeView(ListView): # na home stranici nam vraća listu
 class ArticalDetailView(DetailView):
     model = Post
     template_name = "detail.html"
+
     
     # štp ćemo dobiti ako uključimo detalje stranice ???    
     def get_context_data(self, *args, **kwargs):

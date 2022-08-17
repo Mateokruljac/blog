@@ -1,24 +1,26 @@
-{% extends 'base.html '%}
-<!DOCTYPE html>
-<html lang="en">
-<head>
+{% extends 'base.html' %}
+{% block title %}Update Profile{% endblock %}
+{% block content %}
+<h1>Update Profile: </h1>
+<form method ="POST">
+   {% csrf_token %}
 
-    <title>{% block title %} Edit profile {% endblock %} </title>
-</head>
-<body>
-    {% block content %}
-    <h1>Edit profile</h1>
-    <br>
-    Bio: {{ user.profile.biography }}
-    <br>
-    <div class ="form-group"> 
-    <form method ="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.media }}
-        {{form.as_p}}
-        <button class="btn btn-dark">Update</button>
-    </form>
-   </div>
-    {% endblock %}
-</body>
-</html>
+      {{form.as_p}}<a href= "{% url 'password_change' %}">Change password!</a>  <br><hr><br>  
+      <button type="Submit" class="btn btn-dark">Save</button>
+      <button type="button" class="btn btn-dark"><a href = "{% url 'home' %}" style ="color : white">Home</button>
+   
+           
+      <script>
+         var paras = document.getElementsByClassName('helptext');
+         while(paras[0]) {
+        paras[0].parentNode.removeChild(paras[0]);
+         }
+         
+         var paras2 = document.getElementById('id_password');
+         paras2.remove();
+
+         document.getElementById('id_password').removeChild();
+
+      </script>
+</form>
+{% endblock %} 
