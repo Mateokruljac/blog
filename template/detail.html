@@ -50,7 +50,7 @@
                             <img src="{{ post.author.profile.profile_images.url }}" 
                             alt="{{ user.username }}`s photo"  class="card-img">
                             {% else %}
-                            <img src="{% static 'images/user.png' %}" 
+                            <img src="{% static 'myblog/img/user.png' %}" 
                             alt="{{ post.author.username }}`s photo"  class="card-img">
                             {% endif %}
                               </div>
@@ -136,7 +136,7 @@
                             <img src="{{ post.author.profile.profile_images.url }}" 
                             alt="{{ user.username }}`s photo"  class="card-img">
                             {% else %}
-                            <img src="{% static 'images/user.png' %}" 
+                            <img src="{% static 'myblog/img/user.png' %}" 
                             alt="{{ post.author.username }}`s photo"  class="card-img">
                             {% endif %}
                           </div>
@@ -200,7 +200,7 @@
                             <img src="{{ post.author.profile.profile_images.url }}" 
                             alt="{{ user.username }}`s photo"  class="card-img">
                             {% else %}
-                            <img src="{{post.author.profile.profile_images }}" 
+                            <img src="{% static 'myblog/img/user.png' %}" 
                             alt="{{ post.author.username }}`s photo"  class="card-img">
                             {% endif %}
               </div>
