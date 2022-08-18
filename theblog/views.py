@@ -57,8 +57,9 @@ class AddPostView(CreateView):
     model = Post
     form_class = PostForm
     template_name  = "add_post.html"
+    success_url = reverse_lazy("success_addpost")
     # fields = "__all__"
-    
+
         
     # get_context_data nam omogućuje da se "catergoy" konstantno pojavljuje na strancima
     #na kojima smo stavili ovu metodu....pojavljuje se u obliku rječnika 
@@ -67,6 +68,9 @@ class AddPostView(CreateView):
         context = super(AddPostView,self).get_context_data(*args, **kwargs)
         context["category_menu"] = category_menu
         return context
+
+def success_add_post(request):
+    return render (request,"success_add_post.html",{})
 
 class AddCategoryView(CreateView): 
     model = Category

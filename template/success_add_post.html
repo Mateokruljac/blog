@@ -1,0 +1,13 @@
+{% extends 'base.html '%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>{% block title %}Success message {% endblock %} </title>
+</head>
+<body>
+    {% block content %}
+    <h1>Hi,{{ user.username }}, your post is successfully created!</h1>
+    <button class = "btn btn-outline-dark"><a href = "{% url 'home' %}" style="color : black">Home</a></button>
+    {% endblock %}
+</html>
