@@ -40,13 +40,27 @@ class ProfilePageForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ["biography","profile_images","instagram_url","facebook_url","twitter_url","linkedin_url"]
-        
-        def __init__(self,*args, **kwargs):
-            super(ProfilePageForm,self).__init__(*args, **kwargs)
-
-            self.fields["facebook_url"] = forms.CharField(widget=forms.TextInput(attrs={"class":"form-control","placeholder":"Title"}))
-            self.fields["instagram_url"] = forms.CharField(widget=forms.TextInput(attrs={"class":"form-control","placeholder":"Tag..."}))
-            self.fields["linkedin_url"] = forms.CharField(widget=forms.TextInput(attrs={"class":"form-control",}))
+        widgets = {
+            "biography" : forms.Textarea(attrs = {
+                "class" : "form-control",
+                "placeholder" : "Write..."
+            }),
+            "profile_images" : forms.FileInput(attrs = {
+                "class" : "form-control"
+                }),
+            "instagram_url" : forms.TextInput(attrs = {
+                "class" : "form-control"
+            }),
+            "facebook_url" : forms.TextInput(attrs = {
+                "class" : "form-control"
+            }),
+            "twitter_url" : forms.TextInput(attrs = {
+                "class" : "form-control"
+            }),
+            "linkedin_url": forms.TextInput(attrs = {
+                "class" : "form-control"
+            })
+        }
     
             
        

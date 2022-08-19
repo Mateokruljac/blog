@@ -76,7 +76,7 @@ class AddCategoryView(CreateView):
     model = Category
     template_name  = "add_category.html"
     fields = "__all__"
-    
+    success_url = reverse_lazy("success_category")
         
     # get_context_data nam omogućuje da se "catergoy" konstantno pojavljuje na strancima
     #na kojima smo stavili ovu metodu....pojavljuje se u obliku rječnika 
@@ -85,6 +85,10 @@ class AddCategoryView(CreateView):
         context = super(AddCategoryView,self).get_context_data(*args, **kwargs)
         context["category_menu"] = category_menu
         return context
+
+def success_addcategory(request):
+    category = Category.objects.all().order_by("-id")[0]
+    return render (request, "success_category.html",{"category":category})
 
 class UpdatePostView(UpdateView):
     model = Post
