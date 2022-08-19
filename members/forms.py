@@ -35,7 +35,39 @@ class EditForm(UserChangeForm):
 class ProfilePageForm(forms.ModelForm):
     instagram_url = forms.CharField(max_length = 200,widget=forms.TextInput(attrs={"class":"form-control"}))
     facebook_url = forms.CharField(max_length=200,widget=forms.TextInput(attrs={"class":"form-control"}))
-    linkeidin_url = forms.CharField(max_length=200,widget=forms.TextInput(attrs={"class":"form-control"}))
+    linkedin_url = forms.CharField(max_length=200,widget=forms.TextInput(attrs={"class":"form-control"}))
+    
+    class Meta:
+        model = Profile
+        fields = ["biography","profile_images","instagram_url","facebook_url","twitter_url","linkedin_url"]
+        widgets = {
+            "biography" : forms.Textarea(attrs = {
+                "class" : "form-control",
+                "placeholder" : "Write..."
+            }),
+            "profile_images" : forms.FileInput(attrs = {
+                "class" : "form-control"
+                }),
+            "instagram_url" : forms.TextInput(attrs = {
+                "class" : "form-control"
+            }),
+            "facebook_url" : forms.TextInput(attrs = {
+                "class" : "form-control"
+            }),
+            "twitter_url" : forms.TextInput(attrs = {
+                "class" : "form-control"
+            }),
+            "linkedin_url": forms.TextInput(attrs = {
+                "class" : "form-control"
+            })
+        }
+    
+            
+
+class EditProfilePage(forms.ModelForm):
+    instagram_url = forms.CharField(max_length = 200,widget=forms.TextInput(attrs={"class":"form-control"}))
+    facebook_url = forms.CharField(max_length=200,widget=forms.TextInput(attrs={"class":"form-control"}))
+    linkedin_url = forms.CharField(max_length=200,widget=forms.TextInput(attrs={"class":"form-control"}))
     
     class Meta:
         model = Profile

@@ -36,6 +36,13 @@ class EditForm(forms.ModelForm): # greška je ako stavimo form bez model
     class Meta:
         model  = Post
         fields = ["title","title_tag","body","category","snippet","image"]
+        widgets = {
+            "body": forms.Textarea(attrs={"class":"form-control","placeholder":"Write..."}),
+            "author" : forms.Select(attrs= {"class":"form-control","id":"requestUser"})
+            
+
+        }
+       
     
     def __init__(self,*args, **kwargs):
         super(EditForm,self).__init__(*args, **kwargs)
@@ -44,7 +51,7 @@ class EditForm(forms.ModelForm): # greška je ako stavimo form bez model
         self.fields["snippet"] = forms.CharField(widget=forms.TextInput(attrs={"class":"form-control",}))
         self.fields["category"] = forms.CharField(widget=forms.Select(choices = choices_list,attrs={"class":"form-control",
                                                                                                     "placeholder":"Choice"}))
-        self.fields["body"] = forms.CharField(widget=forms.Textarea(attrs={"class":"form-control","placeholder":"Write..."}))
+       
         
         
 class CommentForm(forms.ModelForm):

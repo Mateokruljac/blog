@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views import generic
 from django.contrib.auth.forms import UserCreationForm,PasswordChangeForm,UserChangeForm
-from members.forms import EditForm, NewPassword, ProfilePageForm, SignUpForm
+from members.forms import EditForm, EditProfilePage, NewPassword, ProfilePageForm, SignUpForm
 from theblog.models import Profile,Category
 from django.contrib.auth.views import PasswordChangeView
 from django.shortcuts import render
@@ -69,15 +69,21 @@ class UserDetailView (generic.DetailView):
 
 class UserEditView(generic.UpdateView):
     model = Profile
+    form_class = EditProfilePage
     template_name = "registration/user_profile_edit.html"
-    fields = ["biography","profile_images","facebook_url","instagram_url","linkedin_url","twitter_url"]
     success_url = reverse_lazy("home")
     
+    
+    
     def get_context_data(self, *args, **kwargs):
-        category_menu = Category.objects.all()
+        # users = Profile.objects.all()
         context = super(UserEditView,self).get_context_data(*args, **kwargs)
+        user_profile = get_object_or_404(Profile,id = self.kwargs["pk"])
+        context["user_profile"] = user_profile 
+        category_menu = Category.objects.all()
         context["category_menu"] = category_menu
-        return context 
+        
+        return context
 
 class ChangePassword(PasswordChangeView):
     form_class = NewPassword
@@ -92,3 +98,8 @@ class ChangePassword(PasswordChangeView):
 
 def password_success (request):
     return render (request,"registration/success_changed.html",{})
+
+
+
+def about_me (request):
+    return render(request,"about_me.html",{})

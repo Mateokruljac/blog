@@ -15,8 +15,8 @@
                 <li><a href="{% url 'artical_detail' post.pk %}">{{ post.title }}</a> - 
                 {{ post.author.username }} - Category : <a href="{% url 'category' post.category %}">{{ post.category }}</a>
                 
-                <button class = "btn btn-outline-secondary"><a style = "color:black" href = "{% url 'edit_post' post.id %}"style ="color:blanchedalmond">Edit</a></button>
-                <button class = "btn btn-outline-secondary"><a style = "color:black" href = "{% url 'delete_post' post.id %}"style ="color:blanchedalmond">Delete</a></button></li>
+                <button class = "btn btn-secondary" href  = "{% url 'edit_post' post.id %}"><a style = "color:black" href = "{% url 'edit_post' post.id %}"style ="color:blanchedalmond">Edit</a></button>
+                <button class = "btn btn-secondary"><a style = "color:black" href = "{% url 'delete_post' post.id %}"style ="color:blanchedalmond">Delete</a></button></li>
                 <p>{{ post.snippet }}</p>
                 {% else %}
                 <li><a href="{% url 'artical_detail' post.pk %}">{{ post.title }}</a> - 

@@ -7,14 +7,14 @@
 </head>
 <body>
     {% block content %}
-    <h1>Update Post</h1>
-   <div class ="form-group"> 
-    <form method ="POST" enctype="multipart/form-data">
+    <h1>Update Post</h1> 
+    <form method ="POST" enctype="multipart/form-data" >
         {% csrf_token %}
         {{form.as_p}}
-        <button class="btn btn-dark">UPDATE</button>
+        <button class="btn btn-secondary">UPDATE</button>
     </form>
-   </div>
+   
     {% endblock %}
+
 </body>
 </html>

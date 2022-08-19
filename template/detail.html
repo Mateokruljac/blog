@@ -9,6 +9,7 @@
   </head>
   <body>
     {% block content %}
+    
     {% if user.is_authenticated %}
     
      {% if user.id == post.author.id %}
@@ -20,12 +21,12 @@
             <br>
             <hr>
             <p>{{ post.body|safe }}</p>
-            <h1><a href="{% url 'home' %}" class="btn btn-dark">Back</a>  
+            <h1><a href="{% url 'home' %}" class="btn btn-secondary">Back</a>  
             <button class = "btn btn-secondary btn-sm"><a href = "{% url 'edit_post' post.id %}"
                 style ="color:blanchedalmond">Edit</a></button>
             <button class = "btn btn-secondary btn-sm"><a href = "{% url 'delete_post' post.id %}"
                 style ="color:blanchedalmond">Delete</a></button></h1>
-            <hr>
+            <hr color="white">
             <h3>Comments:</h3>
             {% if post.comment.all %} <!--ako nema komentara-->
                {% for comments in post.comment.all %}
@@ -40,10 +41,10 @@
              {% else %}
             <p>There's no comment here. Write the first.   <a href ="{% url 'add_comment' post.pk %}">Add comment</a></p>
             {% endif %}
-            <hr>
+            <hr color="white">
             <h4>Author`s info:</h4> 
          
-                        <div class="card mb-3" style="max-width: 540px;">
+                        <div class="card mb-3  bg-dark" style="max-width: 540px;">
                             <div class="row no-gutters">
                               <div class="col-md-4">
                                 {% if post.author.profile.profile_images %} 
@@ -89,7 +90,7 @@
                 <p><small>By, {{ post.author.username }}   <br>
                     Published: {{ post.post_date }}</small></p>
                     <p>{{ post.body|safe }}<p>
-                        <h1><a href="{% url 'home' %}" class="btn btn-dark">Back</a> 
+                        <h1><a href="{% url 'home' %}" class="btn btn-secondary">Back</a> 
                             {% endif %}
                             <br>
                             <hr>
@@ -111,7 +112,7 @@
                                     {{ total_likes }} people like post.</p>
                                 </form>
                             {% endif %}    
-                    <hr>
+                    <hr color = "white">
                     <h3>Comments:</h3>
                     {% if  post.comment.all %} <!--ako nema komentara-->
                     {% for comments in post.comment.all %}
@@ -120,7 +121,7 @@
                       Date: {{ comments.date_time }}</small>
                    
                    <p>{{ comments.body }}</p>
-                   <hr>
+
                    {% endfor %}
                    <a href ="{% url 'add_comment' post.pk %}">Add comment</a>
                     {% else %}
@@ -129,7 +130,7 @@
                       <hr>
                     <h4>Author`s info:</h4> 
          
-                    <div class="card mb-3" style="max-width: 540px;">
+                    <div class="card mb-3  bg-dark" style="max-width: 540px;">
                         <div class="row no-gutters">
                           <div class="col-md-4">
                            {% if post.author.profile.profile_images %} 
@@ -175,8 +176,8 @@
     <p><small>By, {{ post.author.username }}<br>
         Published: {{ post.post_date }}</small></p>
         <p>{{ post.body|safe }}</p>
-        <h1><a href="{% url 'home' %}" class="btn btn-dark">Back</a> 
-        <hr>
+        <h1><a href="{% url 'home' %}" class="btn btn-secondary">Back</a> 
+        <hr color="white">
         <h3>Comments:</h3>
             {% if  post.comment.all %} <!--ako nema komentara-->
             {% for comments in post.comment.all %}
@@ -190,10 +191,10 @@
             {% else %}
             <p>There's no comment here. Write the first.   <a href ="{% url 'add_comment' post.pk %}">Add comment</a></p>
               {% endif %}
-              <hr>
+              <hr color = "white">
         <h4>Author`s info:</h4> 
          
-        <div class="card mb-3" style="max-width: 540px;">
+        <div class="card mb-3 bg dark" style="max-width: 540px;">
             <div class="row no-gutters">
               <div class="col-md-4">
                 {% if post.author.profile.profile_images %} 

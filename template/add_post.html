@@ -13,7 +13,7 @@
         {% csrf_token %}
         {{ form.media }}
         {{ form.as_p }}
-        <button class="btn btn-dark">SUBMIT</button>
+        <button class="btn btn-secondary">SUBMIT</button>
         <script>
             document.getElementById("requestUser").selectedIndex = parseInt("{{ user.id }}") 
         </script>
