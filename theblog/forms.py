@@ -12,11 +12,10 @@ for item in choices:
 class PostForm(forms.ModelForm): # greška je ako stavimo form bez model 
     class Meta:
         model  = Post
-        fields = ["title","title_tag","body","category","author","snippet","image"]   
+        fields = ["title","title_tag","body","category","snippet","image"]   
         widgets = {
             "body": forms.Textarea(attrs={"class":"form-control","placeholder":"Write..."}),
-            "author" : forms.Select(attrs= {"class":"form-control","id":"requestUser"})
-            
+           
 
         }
        

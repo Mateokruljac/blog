@@ -60,7 +60,9 @@ class AddPostView(CreateView):
     success_url = reverse_lazy("success_addpost")
     # fields = "__all__"
 
-        
+    def form_valid(self,form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
     # get_context_data nam omogućuje da se "catergoy" konstantno pojavljuje na strancima
     #na kojima smo stavili ovu metodu....pojavljuje se u obliku rječnika 
     def get_context_data(self, *args, **kwargs):
