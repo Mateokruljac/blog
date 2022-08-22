@@ -15,8 +15,11 @@
       <input type="password" class="form-control" name = "password" placeholder = "Password">
     </div>
     <button type="submit" class="btn btn-secondary">Submit</button>
-
-    
-</form>
-{% endblock %} 
+  </form>
+  Not registred yet. <a href="{% url 'register' %}">Click here</a><br>
+ <strong> {% for message in messages %}
+        {{message}}
+  {% endfor %}
+  </strong>
+  {% endblock %} 
 

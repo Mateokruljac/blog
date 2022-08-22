@@ -7,7 +7,8 @@ from django.contrib.auth.forms import UserCreationForm,PasswordChangeForm,UserCh
 from members.forms import EditForm, EditProfilePage, NewPassword, ProfilePageForm, SignUpForm
 from theblog.models import Profile,Category
 from django.contrib.auth.views import PasswordChangeView
-from django.shortcuts import render
+from django.shortcuts import render,redirect
+from django.contrib import auth, messages
 
 class CreateUserForm(generic.CreateView):
     form_class = SignUpForm
@@ -18,7 +19,7 @@ class CreateUserForm(generic.CreateView):
         category_menu = Category.objects.all()
         context = super(CreateUserForm,self).get_context_data(*args, **kwargs)
         context["category_menu"] = category_menu
-        return context 
+        return context
 
 class CreateProfilePage(generic.CreateView):
     form_class = ProfilePageForm
@@ -103,3 +104,19 @@ def password_success (request):
 
 def about_me (request):
     return render(request,"about_me.html",{})
+
+
+def loginview (request):
+    if request.method == "POST":
+        username = request.POST["username"]
+        password = request.POST["password"]
+        user = auth.authenticate(username = username, password = password)
+        if user is not None:
+            auth.login(request,user)
+            return render (request,"home.html")
+        else:
+            messages.info(request,"Invalid username or password! Try Again or create new account!")
+            return render(request,"registration/login.html")
+    else:
+        return render (request,"registration/login.html")
+            
