@@ -25,7 +25,8 @@
             <button class = "btn btn-secondary btn-sm"><a href = "{% url 'edit_post' post.id %}"
                 style ="color:blanchedalmond">Edit</a></button>
             <button class = "btn btn-secondary btn-sm"><a href = "{% url 'delete_post' post.id %}"
-                style ="color:blanchedalmond">Delete</a></button></h1>
+                style ="color:blanchedalmond">Delete</a></button></h1><br>
+            <a href = "{% url 'blog_pdf' post.id %}"><small style = "color:white">Download content</small></a>
             <hr color="white">
             <h3>Comments:</h3>
             {% if post.comment.all %} <!--ako nema komentara-->
@@ -111,7 +112,8 @@
                                 style ="margin: 1px; padding : 1px;">Like</button><p style ="font-size: small;">
                                     {{ total_likes }} people like post.</p>
                                 </form>
-                            {% endif %}    
+                            {% endif %} <br>
+                            <a href = "{% url 'blog_pdf' post.id %}"><small style = "color:white">Download content</small></a>       
                     <hr color = "white">
                     <h3>Comments:</h3>
                     {% if  post.comment.all %} <!--ako nema komentara-->
@@ -176,7 +178,8 @@
     <p><small>By, {{ post.author.username }}<br>
         Published: {{ post.post_date }}</small></p>
         <p>{{ post.body|safe }}</p>
-        <h1><a href="{% url 'home' %}" class="btn btn-secondary">Back</a> 
+        <h1><a href="{% url 'home' %}" class="btn btn-secondary">Back</a> <br>
+          <a href = "{% url 'blog_pdf' post.id %}"><small style = "color:white">Download content</small></a>
         <hr color="white">
         <h3>Comments:</h3>
             {% if  post.comment.all %} <!--ako nema komentara-->

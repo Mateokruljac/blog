@@ -3,20 +3,24 @@ from django.urls import reverse, reverse_lazy
 from .models import Category, Comment, Post
 from django.views.generic import ListView,DetailView,CreateView,UpdateView,DeleteView
 from .forms import CommentForm, EditForm, PostForm
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect,FileResponse
 # Create your views here.
 #ListViews - omogućuje rad s listama i vraća nam liste
 # DetailView samo detalj
 
+# import necesserly things for create pdf file 
+import io
+from reportlab.lib.units import inch
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
 
-class HomeView(ListView): # na home stranici nam vraća listu
-    #koji model i template želimo koristiti
+
+class HomeView(ListView): 
     model = Post 
     template_name = "home.html"
-    #možemo proslijediti id da ide od posljednjeg ili nešto drugho npr title, a ako želimo obrnuto stavimo minus
-    # najčešće se radi order by date
+   
     ordering = ["title"]
-    # ordering = ["-post_date"]
+  
     
         
     # get_context_data nam omogućuje da se "catergoy" konstantno pojavljuje na strancima
@@ -160,3 +164,39 @@ class AddCommentView(CreateView):
     #vraća nam home 
     success_url = reverse_lazy("home")
 
+
+
+def blogarticle_pdf(request,id):
+    # module io: provides Python`s main dealing with various type of I/O such as text,bytes
+    # it allows us to manage file-related input/output operation
+    
+    #create bytestream 
+    byte = io.BytesIO() #file
+    
+    #create canvas
+    cnvs = canvas.Canvas(byte,pagesize = letter,bottomup=0)
+    
+    #text
+    canvas_text = cnvs.beginText()
+    canvas_text.setTextOrigin(inch,inch)
+    
+    post_detail = Post.objects.get(pk = id)
+    
+    lines = []
+    
+    lines.append(f"Title: {post_detail.title}")
+    lines.append(f"Title tag: {post_detail.title_tag}")
+    lines.append(f"Description: {post_detail.body}")
+    lines.append(f"Snippet: {post_detail.snippet}")
+    lines.append(f"Date: {post_detail.post_date}")
+    
+    for line in lines:
+        canvas_text.textLine(line)
+        
+    cnvs.drawText(canvas_text)
+    cnvs.showPage()
+    cnvs.save()
+    byte.seek(0) #move file pointer to another position
+    
+    return FileResponse(byte,as_attachment=True,filename=f"{post_detail.title}.pdf")
+    

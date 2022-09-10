@@ -119,4 +119,3 @@ def loginview (request):
             return render(request,"registration/login.html")
     else:
         return render (request,"registration/login.html")
-            
