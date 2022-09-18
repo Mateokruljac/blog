@@ -158,38 +158,4 @@ class AddCommentView(CreateView):
     success_url = reverse_lazy("home")
 
 
-
-def blogarticle_pdf(request,id):
-    # module io: provides Python`s main dealing with various type of I/O such as text,bytes
-    # it allows us to manage file-related input/output operation
-    
-    #create bytestream 
-    byte = io.BytesIO() #file
-    
-    #create canvas
-    cnvs = canvas.Canvas(byte,pagesize = letter,bottomup=0)
-    
-    #text
-    canvas_text = cnvs.beginText()
-    canvas_text.setTextOrigin(inch,inch)
-    
-    post_detail = Post.objects.get(pk = id)
-    
-    lines = []
-    
-    lines.append(f"Title: {post_detail.title}")
-    lines.append(f"Title tag: {post_detail.title_tag}")
-    lines.append(f"Description: {post_detail.body}")
-    lines.append(f"Snippet: {post_detail.snippet}")
-    lines.append(f"Date: {post_detail.post_date}")
-    
-    for line in lines:
-        canvas_text.textLine(line)
-        
-    cnvs.drawText(canvas_text)
-    cnvs.showPage()
-    cnvs.save()
-    byte.seek(0) #move file pointer to another position
-    
-    return FileResponse(byte,as_attachment=True,filename=f"{post_detail.title}.pdf")
     
