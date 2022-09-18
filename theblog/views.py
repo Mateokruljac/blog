@@ -8,13 +8,6 @@ from django.http import HttpResponseRedirect,FileResponse
 #ListViews - omogućuje rad s listama i vraća nam liste
 # DetailView samo detalj
 
-# import necesserly things for create pdf file 
-import io
-from reportlab.lib.units import inch
-from reportlab.lib.pagesizes import letter
-from reportlab.pdfgen import canvas
-
-
 class HomeView(ListView): 
     model = Post 
     template_name = "home.html"
